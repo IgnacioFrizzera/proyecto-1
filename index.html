@@ -1,18 +1,32 @@
-<!doctype html>
+﻿<!doctype html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Integracion JQuery para obtener JSON-->
+    <script src="js/jquery-3.5.0.min.js"></script>
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/app.css">
 
-    <title>Proyecto 1 aprendiendo programación Web</title>
-  </head>
-  <body>
-    <h1>Texto</h1>
-
+    <title>Covid-19 visualizacion en España, Brasil y Estados Unidos</title>
+</head>
+<body>
     <!-- JavaScript -->
     <script src="js/app.js"></script>
-  </body>
+
+    <h1>Covid-19 Visualización</h1>
+
+    <p>Grafico here</p>
+
+    <button onclick="load_data()">JSON data</button>
+
+    <p id="json_plot"></p>
+
+    <a href="paises/brazil.html">Brazil</a>
+    <a href="paises/spain.html">Spain</a>
+    <a href="paises/us.html">US</a>
+
+</body>
 </html>

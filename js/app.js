@@ -31,8 +31,6 @@ function load_data() {
         console.log(spain_info[0], "Spain day 0");
         console.log(usa_info[0], "USA day 0");
 
-
-
         console.log(brazil_info[0].date, "Brazil day 0 date");
         console.log(spain_info[0].date, "Spain day 0 date");
         console.log(usa_info[0].date, "USA day 0 date");
