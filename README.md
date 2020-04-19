@@ -1,6 +1,6 @@
 # Proyecto 1:  HTML - CSS - Javascript - DOM
 
-Proyecto a desarrollar para la matería Ingeniería de aplicaciones Web
+Proyecto a desarrollar para la materia Ingeniería de aplicaciones Web
 
 ## Tema elegido: Covid-19 (Tema 3)
 
