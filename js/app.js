@@ -1,11 +1,7 @@
-// Incorpore JQuery para obtener el JSON de la URL
+// Incorpore JQuery para obtener el JSON de la URL y Plotly para graficar
 
 
-var brazil_confirmed = brazil_deaths = brazil_recovered = [];
-
-var spain_confirmed = spain_deaths = spain_recovered = [];
-
-var usa_confirmed = usa_deaths = usa_recovered = [];
+var brazil_info, spain_info, usa_info, china_info, italy_info;
 
 
 // Todas van del 22 de Enero al dia actual
@@ -13,7 +9,6 @@ var dates = [];
 
 // Todos los arrays van a tener el mismo len, ya que la informacion se toma desde el 22 de Enero en adelante
 var arrs_len;
-
 
 // Al cargarse la pagina que ejecute la generacion del grafico
 window.onload = load_data();
@@ -33,83 +28,177 @@ function load_data() {
      * */
     $.getJSON(url, function (data) {
 
-        var brazil_info = data.Brazil;
-        var spain_info = data.Spain;
-        var usa_info = data.US;
+        brazil_info = data.Brazil;
+        spain_info = data.Spain;
+        usa_info = data.US;
+        china_info = data.China;
+        italy_info = data.Italy;
 
         arrs_len = Object.keys(brazil_info).length;
 
-        // Test print en parrafo
-        var par = document.getElementById("json_plot");
-        par.innerHTML = JSON.stringify(usa_info[0].date) + " US day 0";
-
-        // Generar arrays
-        for (i = 0; i < arrs_len; i++) {
-
-            brazil_confirmed.push(brazil_info[i].confirmed);
-            usa_confirmed.push(usa_info[i].confirmed);
-            spain_confirmed.push(spain_info[i].confirmed);
-
+        // Armo las fechas
+        for (var i = 0; i < arrs_len; i++) {
             dates.push(brazil_info[i].date);
         }
 
-
-        // Graficar la informacion
-        grafico = document.getElementById('grafico');
-
-        var brazil_grafico = {
-            x: dates,
-            y: brazil_confirmed,
-            type: 'scatter',
-            name: 'Brasil'
-        };
-
-        var spain_grafico = {
-            x: dates,
-            y: spain_confirmed,
-            type: 'scatter',
-            name: "Espa\361a" //Simbolo de la ñ, no se por qué el UTF-8 no la reconoce
-        };
-
-        var usa_grafico = {
-            x: dates,
-            y: usa_confirmed,
-            type: 'scatter',
-            name: 'U.S.A'
-        };
-
-        var data = [brazil_grafico, spain_grafico, usa_grafico];
-
-        var layout = {
-            xaxis: {
-                title: 'Fecha',
-                showgrid: false,
-                zeroline: false
-            },
-            yaxis: {
-                title: 'Casos confirmados',
-                showline: false
-            }
-        };
-
-        Plotly.newPlot(grafico, data, layout);
+        // Grafico de inicio por defecto es el de casos confirmados
+        show_cases();
     });
 }
 
 
-/**
- *  Seria un onClick que desplegaria las 3 opciones: visualizar por infectados, muertos, recuperados
- *  Por defecto esta iniciado en infectados
- * */
-function show_options() {
+function show_cases() {
+    // Generar arrays
+    var spain_confirmed = [];
+    var brazil_confirmed = [];
+    var usa_confirmed = [];
+    var china_confirmed = [];
+    var italy_confirmed = [];
 
+    for (i = 0; i < arrs_len; i++) {
+        brazil_confirmed.push(brazil_info[i].confirmed);
+        usa_confirmed.push(usa_info[i].confirmed);
+        spain_confirmed.push(spain_info[i].confirmed);
+        china_confirmed.push(china_info[i].confirmed);
+        italy_confirmed.push(italy_info[i].confirmed);
+    }
+
+    // Graficar la informacion
+    var countries = [brazil_confirmed, spain_confirmed, usa_confirmed, china_confirmed, italy_confirmed];
+    make_graph(dates, countries, "Casos confirmados", "Numero de casos confirmados por pais");
+}
+
+function show_deaths() {
+    // Generar arrays
+    var spain_deaths = [];
+    var brazil_deaths = [];
+    var usa_deaths = [];
+    var china_deaths = [];
+    var italy_deaths = [];
+
+    for (i = 0; i < arrs_len; i++) {
+        brazil_deaths.push(brazil_info[i].deaths);
+        usa_deaths.push(usa_info[i].deaths);
+        spain_deaths.push(spain_info[i].deaths);
+        china_deaths.push(china_info[i].deaths);
+        italy_deaths.push(italy_info[i].deaths);
+    }
+
+    // Graficar la informacion
+    var countries = [brazil_deaths, spain_deaths, usa_deaths, china_deaths, italy_deaths];
+    make_graph(dates, countries, "Muertes", "Numero de muertes por pais");
+}
+
+function show_recovered() {
+    // Generar arrays
+    var spain_recovered = [];
+    var brazil_recovered = [];
+    var usa_recovered = [];
+    var china_recovered = [];
+    var italy_recovered = [];
+
+    for (i = 0; i < arrs_len; i++) {
+        brazil_recovered.push(brazil_info[i].recovered);
+        usa_recovered.push(usa_info[i].recovered);
+        spain_recovered.push(spain_info[i].recovered);
+        china_recovered.push(china_info[i].recovered);
+        italy_recovered.push(italy_info[i].recovered);
+    }
+
+    // Graficar la informacion
+    var countries = [brazil_recovered, spain_recovered, usa_recovered, china_recovered, italy_recovered];
+    make_graph(dates, countries, "Recuperados", "Numero de recuperados por pais");
+}
+
+function show_lastfif() {
+    // Generar arrays
+    var spain_confirmed = [];
+    var brazil_confirmed = [];
+    var usa_confirmed = [];
+    var china_confirmed = [];
+    var italy_confirmed = [];
+
+    var i = arrs_len - 15;
+    var dates_aux = [];
+
+    for (i; i < arrs_len; i++) {
+        brazil_confirmed.push(brazil_info[i].confirmed);
+        usa_confirmed.push(usa_info[i].confirmed);
+        spain_confirmed.push(spain_info[i].confirmed);
+        china_confirmed.push(china_info[i].confirmed);
+        italy_confirmed.push(italy_info[i].confirmed);
+
+        dates_aux.push(brazil_info[i].date);
+    }
+
+    var countries = [brazil_confirmed, spain_confirmed, usa_confirmed, china_confirmed, italy_confirmed];
+    make_graph(dates_aux, countries, "Casos activos", "Casos activos en los ultimos 15 dias por pais");
 }
 
 
 /**
- * Cuando se hace un onMouseOver de alguno de los 3 paises, que muestre solo la curva de dicho pais
- * */
-function show_country_line() {
+ *  * Arma el grafico para plasmar la informacion
+ * @param {valores de las fechas a graficar} x_value
+ * @param {array que contiene los valores de cada pais} y_values
+ * @param {string para armar el grafico, puede ser casos confirmados, muertes, recuperados} y_label
+ * @param {titulo del grafico} graph_title
+ */
+function make_graph(x_value, y_values, y_label, graph_title) {
+    var grafico = document.getElementById('grafico');
 
+    var brazil_grafico = {
+        x: x_value,
+        y: y_values[0],
+        type: 'scatter',
+        name: 'Brasil'
+    };
+
+    var spain_grafico = {
+        x: x_value,
+        y: y_values[1],
+        type: 'scatter',
+        name: "Espa\361a" //Simbolo de la ñ, no se por qué el UTF-8 no la reconoce
+    };
+
+    var usa_grafico = {
+        x: x_value,
+        y: y_values[2],
+        type: 'scatter',
+        name: 'U.S.A'
+    };
+
+    var china_grafico = {
+        x: x_value,
+        y: y_values[3],
+        type: 'scatter',
+        name: 'China'
+    };
+
+    var italy_grafico = {
+        x: x_value,
+        y: y_values[4],
+        type: 'scatter',
+        name: 'Italia'
+    };
+
+
+    var data = [brazil_grafico, spain_grafico, usa_grafico, china_grafico, italy_grafico];
+
+    var layout = {
+        title: {
+            text: graph_title
+        },
+        xaxis: {
+            title: 'Fecha',
+            showgrid: false,
+            zeroline: false
+        },
+        yaxis: {
+            title: y_label,
+            showline: false
+        }
+    };
+
+    Plotly.newPlot(grafico, data, layout, { displayModeBar: false });
 }
 

@@ -22,15 +22,30 @@
     <!-- JavaScript -->
     <script src="js/app.js"></script>
 
-    <h1>Covid-19 Visualización</h1>
+    <div id="titulo">
+        <h1>Covid-19 Visualización</h1>
+    </div>
 
-    <div id="grafico" style="width:1200px;height:600px;"></div>
 
-    <p id="json_plot"></p>
+    <div id="grafico"></div>
 
-    <a href="paises/brazil.html">Brazil</a>
-    <a href="paises/spain.html">Spain</a>
-    <a href="paises/us.html">US</a>
+    <div id="buttons">
+        <button class="button" onclick="show_cases()">Ver casos activos</button>
+        <button class="button" onclick="show_deaths()">Ver muertes</button>
+        <button class="button" onclick="show_recovered()">Ver recuperados</button>
+        <button class="button" onclick="show_lastfif()">Ver activos en los ultimos 15 dias</button>
+    </div>
+
+    <br>
+    <br>
+
+    <div id="links">
+        <a id="brazil" href="paises/brazil.html">Brazil</a>
+        <a href="paises/spain.html">Spain</a>
+        <a href="paises/us.html">US</a>
+        <a href="paises/china.html">China</a>
+        <a href="paises/italy.html">Italy</a>
+    </div>
 
 </body>
 </html>
