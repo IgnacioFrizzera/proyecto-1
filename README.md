@@ -13,3 +13,4 @@ La página va a consistir de un portal donde se presente un gráfico mostrando i
 * Cantidad de recuperados
 * Cantidad de contagiados en los ultimos 15 dias
 
+Además se planea agregar una especie de feed con links a noticias sobre cada país
