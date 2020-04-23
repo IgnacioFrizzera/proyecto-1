@@ -65,7 +65,7 @@ function show_cases() {
 
     // Graficar la informacion
     var countries = [brazil_confirmed, spain_confirmed, usa_confirmed, china_confirmed, italy_confirmed];
-    make_graph(dates, countries, "Casos confirmados", "Numero de casos confirmados por pais");
+    make_graph(dates, countries, "Active cases");
 }
 
 function show_deaths() {
@@ -86,7 +86,7 @@ function show_deaths() {
 
     // Graficar la informacion
     var countries = [brazil_deaths, spain_deaths, usa_deaths, china_deaths, italy_deaths];
-    make_graph(dates, countries, "Muertes", "Numero de muertes por pais");
+    make_graph(dates, countries, "Deaths");
 }
 
 function show_recovered() {
@@ -107,7 +107,7 @@ function show_recovered() {
 
     // Graficar la informacion
     var countries = [brazil_recovered, spain_recovered, usa_recovered, china_recovered, italy_recovered];
-    make_graph(dates, countries, "Recuperados", "Numero de recuperados por pais");
+    make_graph(dates, countries, "Recovered");
 }
 
 function show_lastfif() {
@@ -132,7 +132,7 @@ function show_lastfif() {
     }
 
     var countries = [brazil_confirmed, spain_confirmed, usa_confirmed, china_confirmed, italy_confirmed];
-    make_graph(dates_aux, countries, "Casos activos", "Casos activos en los ultimos 15 dias por pais");
+    make_graph(dates_aux, countries, "Active cases in the past 15 days");
 }
 
 
@@ -141,10 +141,9 @@ function show_lastfif() {
  * @param {valores de las fechas a graficar} x_value
  * @param {array que contiene los valores de cada pais} y_values
  * @param {string para armar el grafico, puede ser casos confirmados, muertes, recuperados} y_label
- * @param {titulo del grafico} graph_title
  */
-function make_graph(x_value, y_values, y_label, graph_title) {
-    var grafico = document.getElementById('grafico');
+function make_graph(x_value, y_values, y_label) {
+    var grafico = document.getElementById('graphic');
 
     var brazil_grafico = {
         x: x_value,
@@ -185,11 +184,8 @@ function make_graph(x_value, y_values, y_label, graph_title) {
     var data = [brazil_grafico, spain_grafico, usa_grafico, china_grafico, italy_grafico];
 
     var layout = {
-        title: {
-            text: graph_title
-        },
         xaxis: {
-            title: 'Fecha',
+            title: 'Date',
             showgrid: false,
             zeroline: false
         },
