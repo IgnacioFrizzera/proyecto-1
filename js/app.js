@@ -1,24 +1,24 @@
-// Incorpore JQuery para obtener el JSON de la URL y Plotly para graficar
 
 var brazil_info, spain_info, usa_info, china_info, italy_info;
 
-// Todas van del 22 de Enero al dia actual
+// All countries dates are from 1-22 to present
 var dates = [];
 
-// Todos los arrays van a tener el mismo len, ya que la informacion se toma desde el 22 de Enero en adelante
+// All arrays have the same length
 var arrs_len;
 
-// Al cargarse la pagina que ejecute la generacion del grafico
+
+// On page launch, loads data and makes the graph
 window.onload = load_data();
 
 /** 
- * Carga y grafica toda la informacion de covid-19 de los paises al abrir la pagina
+ * Loads and plots all the data on page launch
  * https://raw.githubusercontent.com/pomber/covid19/master/docs/timeseries.json archivo en un repo de github
  * */
 function load_data() {
-    var url = "https://raw.githubusercontent.com/pomber/covid19/master/docs/timeseries.json";
+    const url = "https://raw.githubusercontent.com/pomber/covid19/master/docs/timeseries.json";
 
-    /** Forma JSON - esto seria cada index de la info del pais
+    /** JSON
         date: "2020-2-21",
         confirmed: 0,
         deaths: 0,
@@ -38,28 +38,35 @@ function load_data() {
             dates.push(brazil_info[i].date);
         }
 
-        // Store last version of data in case API doesn't work in the future
-        localStorage.clear();
-
-        localStorage.setItem("brazil", JSON.stringify(brazil_info));
-        localStorage.setItem("spain", JSON.stringify(spain_info));
-        localStorage.setItem("italy", JSON.stringify(italy_info));
-        localStorage.setItem("usa", JSON.stringify(usa_info));
-        localStorage.setItem("china", JSON.stringify(china_info));
-
-        localStorage.setItem("dates", JSON.stringify(dates));
-
-        localStorage.setItem("len", arrs_len.toString());
+        // Store last version of data in case the API doesn't work in the future
 
         var today = new Date();
-        last_updated = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        today = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
-        localStorage.setItem("last_update", last_updated);
+        /**
+         * Information updates daily, so if the last update was today, there's no need to save all the data again
+         **/
+        if (today != localStorage.getItem("last_update")) { 
+            localStorage.clear();
+
+            localStorage.setItem("brazil", JSON.stringify(brazil_info));
+            localStorage.setItem("spain", JSON.stringify(spain_info));
+            localStorage.setItem("italy", JSON.stringify(italy_info));
+            localStorage.setItem("usa", JSON.stringify(usa_info));
+            localStorage.setItem("china", JSON.stringify(china_info));
+
+            localStorage.setItem("dates", JSON.stringify(dates));
+
+            localStorage.setItem("len", arrs_len.toString());
+
+            localStorage.setItem("last_update", today);
+        }
 
         show_cases();
     })
+        // In case it fails to get the data from the URL, loads last saved data
         .fail(function () {
-
+            
             brazil_info = JSON.parse(localStorage.getItem("brazil"));
             spain_info = JSON.parse(localStorage.getItem("spain"));
             italy_info = JSON.parse(localStorage.getItem("italy"));
@@ -72,19 +79,17 @@ function load_data() {
 
             date = localStorage.getItem("last_update");
 
-            console.log(brazil_info[0]);
-
             alert("Server error, using data from: " + date);
 
             show_cases();
         });
 }
 
-
+/**
+ * Gets active cases data and then plots it
+ * */
 function show_cases() {
-    console.log("hola");
-    console.log(brazil_info[0]);
-    // Generar arrays
+
     var spain_confirmed = [];
     var brazil_confirmed = [];
     var usa_confirmed = [];
@@ -93,20 +98,21 @@ function show_cases() {
 
     for (i = 0; i < arrs_len; i++) {
         brazil_confirmed.push(brazil_info[i].confirmed);
-        console.log(brazil_info[i].confirmed);
         usa_confirmed.push(usa_info[i].confirmed);
         spain_confirmed.push(spain_info[i].confirmed);
         china_confirmed.push(china_info[i].confirmed);
         italy_confirmed.push(italy_info[i].confirmed);
     }
 
-    // Graficar la informacion
     var countries = [brazil_confirmed, spain_confirmed, usa_confirmed, china_confirmed, italy_confirmed];
     make_graph(dates, countries, "Active cases");
 }
 
+/**
+ * Gets deaths data and then plots it
+ * */
 function show_deaths() {
-    // Generar arrays
+
     var spain_deaths = [];
     var brazil_deaths = [];
     var usa_deaths = [];
@@ -121,13 +127,15 @@ function show_deaths() {
         italy_deaths.push(italy_info[i].deaths);
     }
 
-    // Graficar la informacion
     var countries = [brazil_deaths, spain_deaths, usa_deaths, china_deaths, italy_deaths];
     make_graph(dates, countries, "Deaths");
 }
 
+/**
+ * Gets recovered cases data and then plots it
+ * */
 function show_recovered() {
-    // Generar arrays
+
     var spain_recovered = [];
     var brazil_recovered = [];
     var usa_recovered = [];
@@ -142,13 +150,14 @@ function show_recovered() {
         italy_recovered.push(italy_info[i].recovered);
     }
 
-    // Graficar la informacion
     var countries = [brazil_recovered, spain_recovered, usa_recovered, china_recovered, italy_recovered];
     make_graph(dates, countries, "Recovered");
 }
 
+/**
+ * Gets active cases in the past 15 days data and then plots it
+ * */
 function show_lastfif() {
-    // Generar arrays
     var spain_confirmed = [];
     var brazil_confirmed = [];
     var usa_confirmed = [];
@@ -174,43 +183,43 @@ function show_lastfif() {
 
 
 /**
- *  * Arma el grafico para plasmar la informacion
- * @param {valores de las fechas a graficar} x_value
- * @param {array que contiene los valores de cada pais} y_values
- * @param {string para armar el grafico, puede ser casos confirmados, muertes, recuperados} y_label
+ *  * Makes the graph to show the information
+ * @param {dates} x_value
+ * @param {array where each index is the information of a country} y_values
+ * @param {shows if the graph is showing deaths, active, recovered cases} y_label
  */
 function make_graph(x_value, y_values, y_label) {
-    var grafico = document.getElementById('graphic');
+    var graph = document.getElementById('graphic');
 
-    var brazil_grafico = {
+    var brazil_graph = {
         x: x_value,
         y: y_values[0],
         type: 'scatter',
         name: 'Brazil'
     };
 
-    var spain_grafico = {
+    var spain_graph = {
         x: x_value,
         y: y_values[1],
         type: 'scatter',
         name: "Spain"
     };
 
-    var usa_grafico = {
+    var usa_graph = {
         x: x_value,
         y: y_values[2],
         type: 'scatter',
         name: 'U.S.A'
     };
 
-    var china_grafico = {
+    var china_graph = {
         x: x_value,
         y: y_values[3],
         type: 'scatter',
         name: 'China'
     };
 
-    var italy_grafico = {
+    var italy_graph = {
         x: x_value,
         y: y_values[4],
         type: 'scatter',
@@ -218,7 +227,7 @@ function make_graph(x_value, y_values, y_label) {
     };
 
 
-    var data = [brazil_grafico, spain_grafico, usa_grafico, china_grafico, italy_grafico];
+    var data = [brazil_graph, spain_graph, usa_graph, china_graph, italy_graph];
 
     var layout = {
         xaxis: {
@@ -232,6 +241,5 @@ function make_graph(x_value, y_values, y_label) {
         }
     };
 
-    Plotly.newPlot(grafico, data, layout, { displayModeBar: false });
+    Plotly.newPlot(graph, data, layout, { displayModeBar: false });
 }
-

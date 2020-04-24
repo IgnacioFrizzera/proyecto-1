@@ -3,6 +3,7 @@ body {
     font-family: 'Trebuchet MS';
 }
 
+
 .jumbotron {
     margin-left: auto;
     margin-right: auto;
@@ -11,12 +12,14 @@ body {
 
 .container {
     text-align: center;
+    padding:12px;
 }
 
 #buttons {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+    padding-bottom:12px;
 }
 
 #graphic {
@@ -24,6 +27,12 @@ body {
     width: 1000px;
     margin-left: auto;
     margin-right: auto;
+}
+
+#personal_info {
+    padding-top:24px;
+    padding-bottom:12px;
+    letter-spacing:6px;
 }
 
 .button {
@@ -55,6 +64,6 @@ body {
 
 .img_fluid {
     float: left;
-    max-height: 15%;
-    max-width: 15%;
+    max-height: 10%;
+    max-width: 10%;
 }

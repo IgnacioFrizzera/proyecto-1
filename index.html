@@ -4,17 +4,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Integracion JQuery para obtener JSON-->
+    <!-- JQuery integration for JSON -->
     <script src="https://code.jquery.com/jquery-3.5.0.min.js"
             integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
             crossorigin="anonymous">
     </script>
-    <!-- Integracion Plotly para graficar-->
+    <!-- Plotly to graph -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
     <!-- CSS -->
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <!-- Font Awesome Brand Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/app.css">
 
     <!-- Latest compiled JavaScript -->
@@ -29,7 +31,7 @@
     <div class="jumbotron">
         <div class="form-group">
             <a href="https://www.paho.org/en">
-                <img src="https://lh3.googleusercontent.com/proxy/AGJhdmmzesW_QeAmEt9b-2GYfkjhIy7QAdQAhaSZ8xW1ySFidQPfN6JZxQp8xRItw44-AxZ0OCmEzIdYjTImed5WWUJ91C1gbdoFI7WEhthLbwQ99BlL6ZOZhIw_7WGxVwIN3bv1JQse1eJ3OGMgMWIwKg"
+                <img src="https://www.oceantranslations.com/wp-content/uploads/2019/05/paho-logo-blue.png"
                      class="img_fluid" />
             </a>
             <h1>Covid-19 Visualization</h1>
@@ -45,8 +47,6 @@
         <button class="button" onclick="show_recovered()">Show recovered</button>
         <button class="button" onclick="show_lastfif()">Show active in the last 15 days</button>
     </div>
-
-    <br />
 
     <div class="alert alert-danger">
         <strong>
@@ -67,7 +67,7 @@
             <li>Sore throat</li>
             <li>Diarrhoea</li>
         </ul>
-        On average it takes 5–6 days from when someone is infected with the virus for symptoms to show, however it can take up to 14 days. For more information go to: 
+        On average it takes 5–6 days from when someone is infected with the virus for symptoms to show, however it can take up to 14 days. For more information go to:
         <a href="https://www.who.int/news-room/q-a-detail/q-a-coronaviruses#:~:text=symptoms">World Health Organization: Covid-19 Symptoms</a>
     </div>
 
@@ -98,7 +98,6 @@
             </div>
         </div>
     </div>
-    <br>
     <div class="container">
         <div class="row">
             <div class="col-md-4">
@@ -111,12 +110,23 @@
             <div class="col-md-4">
                 <div class="usa">
                     <a href="https://www.usa.gov/coronavirus" target="_blank">
-                        <img src="https://www4.lunapic.com/do-not-link-here-use-hosting-instead/158773768882903052?9865287696"alt="Fjords" style="width:100%">
+                        <img src="https://www4.lunapic.com/do-not-link-here-use-hosting-instead/158773768882903052?9865287696" alt="Fjords" style="width:100%">
                     </a>
                 </div>
             </div>
         </div>
     </div>
 
+    <div class="container" id="personal_info">
+        <a href="https://github.com/IgnacioFrizzera">
+            <i class="fa fa-github" style="font-size:36px"></i>
+        </a>
+        <a href="mailto: ignaciofrizzera@gmail.com">
+            <i class="fa fa-envelope-o" style="font-size:36px"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/ignacio-frizzera-1a94ab195/">
+            <i class="fa fa-linkedin" style="font-size:36px"></i>
+        </a>
+    </div>
 </body>
 </html>
