@@ -1,8 +1,6 @@
 // Incorpore JQuery para obtener el JSON de la URL y Plotly para graficar
 
-
 var brazil_info, spain_info, usa_info, china_info, italy_info;
-
 
 // Todas van del 22 de Enero al dia actual
 var dates = [];
@@ -36,18 +34,56 @@ function load_data() {
 
         arrs_len = Object.keys(brazil_info).length;
 
-        // Armo las fechas
         for (var i = 0; i < arrs_len; i++) {
             dates.push(brazil_info[i].date);
         }
 
-        // Grafico de inicio por defecto es el de casos confirmados
+        // Store last version of data in case API doesn't work in the future
+        localStorage.clear();
+
+        localStorage.setItem("brazil", JSON.stringify(brazil_info));
+        localStorage.setItem("spain", JSON.stringify(spain_info));
+        localStorage.setItem("italy", JSON.stringify(italy_info));
+        localStorage.setItem("usa", JSON.stringify(usa_info));
+        localStorage.setItem("china", JSON.stringify(china_info));
+
+        localStorage.setItem("dates", JSON.stringify(dates));
+
+        localStorage.setItem("len", arrs_len.toString());
+
+        var today = new Date();
+        last_updated = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
+        localStorage.setItem("last_update", last_updated);
+
         show_cases();
-    });
+    })
+        .fail(function () {
+
+            brazil_info = JSON.parse(localStorage.getItem("brazil"));
+            spain_info = JSON.parse(localStorage.getItem("spain"));
+            italy_info = JSON.parse(localStorage.getItem("italy"));
+            usa_info = JSON.parse(localStorage.getItem("usa"));
+            china_info = JSON.parse(localStorage.getItem("china"));
+
+            dates = JSON.parse(localStorage.getItem("dates"));
+
+            arrs_len = parseInt(localStorage.getItem("len"));
+
+            date = localStorage.getItem("last_update");
+
+            console.log(brazil_info[0]);
+
+            alert("Server error, using data from: " + date);
+
+            show_cases();
+        });
 }
 
 
 function show_cases() {
+    console.log("hola");
+    console.log(brazil_info[0]);
     // Generar arrays
     var spain_confirmed = [];
     var brazil_confirmed = [];
@@ -57,6 +93,7 @@ function show_cases() {
 
     for (i = 0; i < arrs_len; i++) {
         brazil_confirmed.push(brazil_info[i].confirmed);
+        console.log(brazil_info[i].confirmed);
         usa_confirmed.push(usa_info[i].confirmed);
         spain_confirmed.push(spain_info[i].confirmed);
         china_confirmed.push(china_info[i].confirmed);
@@ -149,14 +186,14 @@ function make_graph(x_value, y_values, y_label) {
         x: x_value,
         y: y_values[0],
         type: 'scatter',
-        name: 'Brasil'
+        name: 'Brazil'
     };
 
     var spain_grafico = {
         x: x_value,
         y: y_values[1],
         type: 'scatter',
-        name: "Espa\361a" //Simbolo de la ñ, no se por qué el UTF-8 no la reconoce
+        name: "Spain"
     };
 
     var usa_grafico = {
@@ -177,7 +214,7 @@ function make_graph(x_value, y_values, y_label) {
         x: x_value,
         y: y_values[4],
         type: 'scatter',
-        name: 'Italia'
+        name: 'Italy'
     };
 
 
