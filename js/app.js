@@ -25,7 +25,6 @@ function load_data() {
         recovered: 0
      * */
     $.getJSON(url, function (data) {
-
         brazil_info = data.Brazil;
         spain_info = data.Spain;
         usa_info = data.US;
@@ -43,9 +42,7 @@ function load_data() {
         var today = new Date();
         today = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
-        /**
-         * Information updates daily, so if the last update was today, there's no need to save all the data again
-         **/
+        // Information updates daily, so if the last update was today, there's no need to save all the data again
         if (today != localStorage.getItem("last_update")) { 
             localStorage.clear();
 
