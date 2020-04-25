@@ -105,7 +105,7 @@ function show_cases() {
     }
 
     var countries = [brazil_confirmed, spain_confirmed, usa_confirmed, china_confirmed, italy_confirmed];
-    make_graph(dates, countries, "Active cases");
+    make_graph(dates, countries, "Active cases", "Active cases");
 }
 
 /**
@@ -128,7 +128,7 @@ function show_deaths() {
     }
 
     var countries = [brazil_deaths, spain_deaths, usa_deaths, china_deaths, italy_deaths];
-    make_graph(dates, countries, "Deaths");
+    make_graph(dates, countries, "Deaths", "Total deaths");
 }
 
 /**
@@ -151,7 +151,7 @@ function show_recovered() {
     }
 
     var countries = [brazil_recovered, spain_recovered, usa_recovered, china_recovered, italy_recovered];
-    make_graph(dates, countries, "Recovered");
+    make_graph(dates, countries, "Recovered", "Recovered cases");
 }
 
 /**
@@ -178,7 +178,7 @@ function show_lastfif() {
     }
 
     var countries = [brazil_confirmed, spain_confirmed, usa_confirmed, china_confirmed, italy_confirmed];
-    make_graph(dates_aux, countries, "Active cases in the past 15 days");
+    make_graph(dates_aux, countries, "Active cases", "Activate cases in the past 15 days");
 }
 
 
@@ -187,8 +187,9 @@ function show_lastfif() {
  * @param {dates} x_value
  * @param {array where each index is the information of a country} y_values
  * @param {shows if the graph is showing deaths, active, recovered cases} y_label
+ * @param {title of the graph} graph_title
  */
-function make_graph(x_value, y_values, y_label) {
+function make_graph(x_value, y_values, y_label, graph_title) {
     var graph = document.getElementById('graphic');
 
     var brazil_graph = {
@@ -230,6 +231,9 @@ function make_graph(x_value, y_values, y_label) {
     var data = [brazil_graph, spain_graph, usa_graph, china_graph, italy_graph];
 
     var layout = {
+        title: {
+            text: graph_title
+        },
         xaxis: {
             title: 'Date',
             showgrid: false,
