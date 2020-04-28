@@ -15,7 +15,7 @@ window.onload = load_data();
 
 /** 
  * Loads and plots all the data on page launch
- * https://raw.githubusercontent.com/pomber/covid19/master/docs/timeseries.json archivo en un repo de github
+ * https://raw.githubusercontent.com/pomber/covid19/master/docs/timeseries.json github repo file
  * */
 function load_data() {
 
@@ -30,7 +30,7 @@ function load_data() {
     }
 
 
-    const url = "https://raw.githubusercontent.com/pomber/covid19/master/docs/timeseries.jso";
+    const url = "https://raw.githubusercontent.com/pomber/covid19/master/docs/timeseries.json";
 
     /** JSON
         date: "2020-2-21",
@@ -83,7 +83,7 @@ function load_data() {
 
             const storage_length = localStorage.length;
 
-            if (3 > 5) {   // Case the local storage has API information stored.
+            if (storage_length > 0) {   // Case the local storage has API information stored.
 
                 brazil_info = JSON.parse(localStorage.getItem("brazil"));
                 spain_info = JSON.parse(localStorage.getItem("spain"));
@@ -117,12 +117,6 @@ function switchTheme(e) {
         document.documentElement.setAttribute('data-theme', 'light');
         localStorage.setItem('theme', 'light');
     }
-
-    const graph = document.getElementById('graphic');
-
-    Plotly.relayout(graph, getLinearLayout());
-    Plotly.relayout(logPlotDiv, getLogLayout());
-    Plotly.relayout(newPlotDiv, getNewLayout());
 }
 
 /**
