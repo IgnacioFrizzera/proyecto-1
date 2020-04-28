@@ -7,6 +7,8 @@ var dates = [];
 // All arrays have the same length
 var arrs_len;
 
+const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+toggleSwitch.addEventListener('change', switchTheme, false);
 
 // On page launch, loads data and makes the graph
 window.onload = load_data();
@@ -16,6 +18,18 @@ window.onload = load_data();
  * https://raw.githubusercontent.com/pomber/covid19/master/docs/timeseries.json archivo en un repo de github
  * */
 function load_data() {
+
+    const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+
+    if (currentTheme) {
+        document.documentElement.setAttribute('data-theme', currentTheme);
+
+        if (currentTheme === 'dark') {
+            toggleSwitch.checked = true;
+        }
+    }
+
+
     const url = "https://raw.githubusercontent.com/pomber/covid19/master/docs/timeseries.json";
 
     /** JSON
@@ -84,6 +98,23 @@ function load_data() {
 
             show_cases();
         });
+}
+
+
+function switchTheme(e) {
+    if (e.target.checked) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+    } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+    }
+
+    const graph = document.getElementById('graphic');
+
+    Plotly.relayout(graph, getLinearLayout());
+    Plotly.relayout(logPlotDiv, getLogLayout());
+    Plotly.relayout(newPlotDiv, getNewLayout());
 }
 
 /**
@@ -199,7 +230,7 @@ function show_lastfif() {
  * @param {title of the graph} graph_title
  */
 function make_graph(x_value, y_values, y_label, graph_title) {
-    var graph = document.getElementById('graphic');
+    const graph = document.getElementById('graphic');
 
     var brazil_graph = {
         x: x_value,

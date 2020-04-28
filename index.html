@@ -26,9 +26,14 @@
     <title>Covid-19 Visualization</title>
 </head>
 <body>
-    
-    <!-- JavaScript -->
-    <script src="js/app.js"></script>
+
+    <!-- Dark theme toogler -->
+    <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" />
+            <div class="slider round"></div>
+        </label>
+    </div>
 
     <div class="jumbotron">
         <div class="form-group">
@@ -40,7 +45,6 @@
             <p>Showing information regardless Covid-19 in Italy, China, United States, Brazil, Spain and Russia</p>
         </div>
     </div>
-
 
     <div class="container-fluid" id="graphic"></div>
 
@@ -156,5 +160,7 @@
         </div>
     </footer>
 
+    <!-- JavaScript -->
+    <script src="js/app.js"></script>
 </body>
 </html>
