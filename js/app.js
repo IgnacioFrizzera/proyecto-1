@@ -30,7 +30,7 @@ function load_data() {
     }
 
 
-    const url = "https://raw.githubusercontent.com/pomber/covid19/master/docs/timeseries.json";
+    const url = "https://raw.githubusercontent.com/pomber/covid19/master/docs/timeseries.jso";
 
     /** JSON
         date: "2020-2-21",
@@ -44,7 +44,7 @@ function load_data() {
         usa_info = data.US;
         china_info = data.China;
         italy_info = data.Italy;
-        russia_info = data.Russia
+        russia_info = data.Russia;
 
         arrs_len = Object.keys(brazil_info).length;
 
@@ -80,23 +80,31 @@ function load_data() {
     })
         // In case it fails to get the data from the URL, loads last saved data
         .fail(function () {
-            
-            brazil_info = JSON.parse(localStorage.getItem("brazil"));
-            spain_info = JSON.parse(localStorage.getItem("spain"));
-            italy_info = JSON.parse(localStorage.getItem("italy"));
-            usa_info = JSON.parse(localStorage.getItem("usa"));
-            china_info = JSON.parse(localStorage.getItem("china"));
-            russia_info = JSON.parse(localStorage.getItem("russia"));
 
-            dates = JSON.parse(localStorage.getItem("dates"));
+            const storage_length = localStorage.length;
 
-            arrs_len = parseInt(localStorage.getItem("len"));
+            if (3 > 5) {   // Case the local storage has API information stored.
 
-            date = localStorage.getItem("last_update");
+                brazil_info = JSON.parse(localStorage.getItem("brazil"));
+                spain_info = JSON.parse(localStorage.getItem("spain"));
+                italy_info = JSON.parse(localStorage.getItem("italy"));
+                usa_info = JSON.parse(localStorage.getItem("usa"));
+                china_info = JSON.parse(localStorage.getItem("china"));
+                russia_info = JSON.parse(localStorage.getItem("russia"));
 
-            alert("Server error, using data from: " + date);
+                dates = JSON.parse(localStorage.getItem("dates"));
 
+                arrs_len = parseInt(localStorage.getItem("len"));
+
+                date = localStorage.getItem("last_update");
+
+                alert("Server error, using data from: " + date);
+            }
+            else {  // Case API failed, local storage is empty, get information from local file
+                // Get local JSON file
+            }
             show_cases();
+            
         });
 }
 
