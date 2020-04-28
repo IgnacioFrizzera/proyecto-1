@@ -1,5 +1,5 @@
 
-var brazil_info, spain_info, usa_info, china_info, italy_info;
+var brazil_info, spain_info, usa_info, china_info, italy_info, russia_info;
 
 // All countries dates are from 1-22 to present
 var dates = [];
@@ -30,9 +30,11 @@ function load_data() {
         usa_info = data.US;
         china_info = data.China;
         italy_info = data.Italy;
+        russia_info = data.Russia
 
         arrs_len = Object.keys(brazil_info).length;
 
+        // All dates are the same for each country
         for (var i = 0; i < arrs_len; i++) {
             dates.push(brazil_info[i].date);
         }
@@ -51,6 +53,7 @@ function load_data() {
             localStorage.setItem("italy", JSON.stringify(italy_info));
             localStorage.setItem("usa", JSON.stringify(usa_info));
             localStorage.setItem("china", JSON.stringify(china_info));
+            localStorage.setItem("russia", JSON.stringify(russia_info));
 
             localStorage.setItem("dates", JSON.stringify(dates));
 
@@ -69,6 +72,7 @@ function load_data() {
             italy_info = JSON.parse(localStorage.getItem("italy"));
             usa_info = JSON.parse(localStorage.getItem("usa"));
             china_info = JSON.parse(localStorage.getItem("china"));
+            russia_info = JSON.parse(localStorage.getItem("russia"));
 
             dates = JSON.parse(localStorage.getItem("dates"));
 
@@ -92,6 +96,7 @@ function show_cases() {
     var usa_confirmed = [];
     var china_confirmed = [];
     var italy_confirmed = [];
+    var russia_confirmed = [];
 
     for (i = 0; i < arrs_len; i++) {
         brazil_confirmed.push(brazil_info[i].confirmed);
@@ -99,9 +104,10 @@ function show_cases() {
         spain_confirmed.push(spain_info[i].confirmed);
         china_confirmed.push(china_info[i].confirmed);
         italy_confirmed.push(italy_info[i].confirmed);
+        russia_confirmed.push(russia_info[i].confirmed);
     }
 
-    var countries = [brazil_confirmed, spain_confirmed, usa_confirmed, china_confirmed, italy_confirmed];
+    var countries = [brazil_confirmed, spain_confirmed, usa_confirmed, china_confirmed, italy_confirmed, russia_confirmed];
     make_graph(dates, countries, "Active cases", "Active cases");
 }
 
@@ -115,6 +121,7 @@ function show_deaths() {
     var usa_deaths = [];
     var china_deaths = [];
     var italy_deaths = [];
+    var russia_deaths = [];
 
     for (i = 0; i < arrs_len; i++) {
         brazil_deaths.push(brazil_info[i].deaths);
@@ -122,9 +129,10 @@ function show_deaths() {
         spain_deaths.push(spain_info[i].deaths);
         china_deaths.push(china_info[i].deaths);
         italy_deaths.push(italy_info[i].deaths);
+        russia_deaths.push(russia_info[i].deaths);
     }
 
-    var countries = [brazil_deaths, spain_deaths, usa_deaths, china_deaths, italy_deaths];
+    var countries = [brazil_deaths, spain_deaths, usa_deaths, china_deaths, italy_deaths, russia_deaths];
     make_graph(dates, countries, "Deaths", "Total deaths");
 }
 
@@ -138,6 +146,7 @@ function show_recovered() {
     var usa_recovered = [];
     var china_recovered = [];
     var italy_recovered = [];
+    var russia_recovered = [];
 
     for (i = 0; i < arrs_len; i++) {
         brazil_recovered.push(brazil_info[i].recovered);
@@ -145,9 +154,10 @@ function show_recovered() {
         spain_recovered.push(spain_info[i].recovered);
         china_recovered.push(china_info[i].recovered);
         italy_recovered.push(italy_info[i].recovered);
+        russia_recovered.push(russia_info[i].recovered);
     }
 
-    var countries = [brazil_recovered, spain_recovered, usa_recovered, china_recovered, italy_recovered];
+    var countries = [brazil_recovered, spain_recovered, usa_recovered, china_recovered, italy_recovered, russia_recovered];
     make_graph(dates, countries, "Recovered", "Recovered cases");
 }
 
@@ -160,6 +170,7 @@ function show_lastfif() {
     var usa_confirmed = [];
     var china_confirmed = [];
     var italy_confirmed = [];
+    var russia_confirmed = [];
 
     var i = arrs_len - 15;
     var dates_aux = [];
@@ -170,11 +181,12 @@ function show_lastfif() {
         spain_confirmed.push(spain_info[i].confirmed);
         china_confirmed.push(china_info[i].confirmed);
         italy_confirmed.push(italy_info[i].confirmed);
+        russia_confirmed.push(russia_info[i].confirmed);
 
         dates_aux.push(brazil_info[i].date);
     }
 
-    var countries = [brazil_confirmed, spain_confirmed, usa_confirmed, china_confirmed, italy_confirmed];
+    var countries = [brazil_confirmed, spain_confirmed, usa_confirmed, china_confirmed, italy_confirmed, russia_confirmed];
     make_graph(dates_aux, countries, "Active cases", "Activate cases in the past 15 days");
 }
 
@@ -224,8 +236,14 @@ function make_graph(x_value, y_values, y_label, graph_title) {
         name: 'Italy'
     };
 
+    var russia_graph = {
+        x: x_value,
+        y: y_values[5],
+        type: 'scatter',
+        name: 'Russia'
+    };
 
-    var data = [brazil_graph, spain_graph, usa_graph, china_graph, italy_graph];
+    var data = [brazil_graph, spain_graph, usa_graph, china_graph, italy_graph, russia_graph];
 
     var layout = {
         title: {

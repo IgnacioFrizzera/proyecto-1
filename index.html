@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <!-- Font Awesome Brand Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <link rel="stylesheet" href="css/app.css">
 
     <!-- Latest compiled JavaScript -->
@@ -25,108 +26,135 @@
     <title>Covid-19 Visualization</title>
 </head>
 <body>
-        <!-- JavaScript -->
-        <script src="js/app.js"></script>
+    
+    <!-- JavaScript -->
+    <script src="js/app.js"></script>
 
-        <div class="jumbotron">
-            <div class="form-group">
-                <a href="https://www.paho.org/en">
-                    <img src="https://www.oceantranslations.com/wp-content/uploads/2019/05/paho-logo-blue.png"
-                         class="img_fluid" />
-                </a>
-                <h1>Covid-19 Visualization</h1>
-                <p>Showing information regardless Covid-19 in Italy, China, United States, Brazil and Spain</p>
+    <div class="jumbotron">
+        <div class="form-group">
+            <a href="https://www.paho.org/en">
+                <img src="https://www.oceantranslations.com/wp-content/uploads/2019/05/paho-logo-blue.png"
+                     class="img_fluid" />
+            </a>
+            <h1>Covid-19 Visualization</h1>
+            <p>Showing information regardless Covid-19 in Italy, China, United States, Brazil, Spain and Russia</p>
+        </div>
+    </div>
+
+
+    <div class="container-fluid" id="graphic"></div>
+
+    <div id="buttons">
+        <button class="button" onclick="show_cases()">Show active cases</button>
+        <button class="button" onclick="show_deaths()">Show deaths</button>
+        <button class="button" onclick="show_recovered()">Show recovered</button>
+        <button class="button" onclick="show_lastfif()">Show active in the last 15 days</button>
+    </div>
+
+    <div class="alert alert-danger">
+        <strong>
+            COVID-19 affects different people in different ways. Most infected people will develop mild to moderate symptoms! If you have any of the following symptoms, don't hesitate to contact a doctor.
+        </strong>
+        <br />
+        Common symptoms:
+        <ul>
+            <li>Fever</li>
+            <li>Tiredness</li>
+            <li>Dry cough</li>
+        </ul>
+        Some people may experience:
+        <ul>
+            <li>Aches and pains</li>
+            <li>Nasal congestion</li>
+            <li>Runny nose</li>
+            <li>Sore throat</li>
+            <li>Diarrhoea</li>
+        </ul>
+        On average it takes 5–6 days from when someone is infected with the virus for symptoms to show, however it can take up to 14 days. For more information go to:
+        <a href="https://www.who.int/news-room/q-a-detail/q-a-coronaviruses#:~:text=symptoms">World Health Organization: Covid-19 Symptoms</a>
+    </div>
+
+    <div class="container">
+        <h2>For more information on each country policies</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="italy">
+                    <a href="http://www.governo.it/it/coronavirus" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Flag_of_Italy_%281946%E2%80%932003%29.png/1024px-Flag_of_Italy_%281946%E2%80%932003%29.png" alt="Lights" style="width:100%">
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="brazil">
+                    <a href="https://coronavirus.saude.gov.br/" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Flag_of_Brazil_%283-2%29.svg/1200px-Flag_of_Brazil_%283-2%29.svg.png" alt="Nature" style="width:100%">
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="spain">
+                    <a href="https://administracion.gob.es/pag_Home/atencionCiudadana/Estado-de-alarma-crisis-sanitaria.html#.XqHpgshKjcc" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Flag_of_Spain.svg/1200px-Flag_of_Spain.svg.png" alt="Fjords" style="width:100%">
+                    </a>
+                </div>
             </div>
         </div>
+    </div>
 
-        <div class="container-fluid" id="graphic"></div>
-
-        <div id="buttons">
-            <button class="button" onclick="show_cases()">Show active cases</button>
-            <button class="button" onclick="show_deaths()">Show deaths</button>
-            <button class="button" onclick="show_recovered()">Show recovered</button>
-            <button class="button" onclick="show_lastfif()">Show active in the last 15 days</button>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="china">
+                    <a href="https://www.gov.cn/english/" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/800px-Flag_of_the_People%27s_Republic_of_China.svg.png" alt="Fjords" style="width:100%">
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="usa">
+                    <a href="https://www.usa.gov/coronavirus" target="_blank">
+                        <img src="res/usa_flag.png" alt="Fjords" style="width:100%">
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="russia">
+                    <a href="https://ru.usembassy.gov/covid-19-information/" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Flag_of_Russia_with_border.svg/1200px-Flag_of_Russia_with_border.svg.png" alt="Fjords" style="width:100%">
+                    </a>
+                </div>
+            </div>
         </div>
+    </div>
 
-        <div class="alert alert-danger">
-            <strong>
-                COVID-19 affects different people in different ways. Most infected people will develop mild to moderate symptoms! If you have any of the following symptoms, don't hesitate to contact a doctor.
-            </strong>
-            <br />
-            Common symptoms:
-            <ul>
-                <li>Fever</li>
-                <li>Tiredness</li>
-                <li>Dry cough</li>
-            </ul>
-            Some people may experience:
-            <ul>
-                <li>Aches and pains</li>
-                <li>Nasal congestion</li>
-                <li>Runny nose</li>
-                <li>Sore throat</li>
-                <li>Diarrhoea</li>
-            </ul>
-            On average it takes 5–6 days from when someone is infected with the virus for symptoms to show, however it can take up to 14 days. For more information go to:
-            <a href="https://www.who.int/news-room/q-a-detail/q-a-coronaviruses#:~:text=symptoms">World Health Organization: Covid-19 Symptoms</a>
-        </div>
 
+    <footer class="page-footer font-small indigo">
         <div class="container">
-            <h2>For more information on each country policies</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="italy">
-                        <a href="http://www.governo.it/it/coronavirus" target="_blank">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Flag_of_Italy_%281946%E2%80%932003%29.png/1024px-Flag_of_Italy_%281946%E2%80%932003%29.png" alt="Lights" style="width:100%">
-                        </a>
-                    </div>
+            <div class="row text-center d-flex justify-content-center pt-5 mb-3">
+                <div class="col-md-2 mb-3">
+                    <a href="https://github.com/IgnacioFrizzera">
+                        <i class="fa fa-github" style="font-size:36px"></i>
+                    </a>
                 </div>
-
-                <div class="col-md-4">
-                    <div class="brazil">
-                        <a href="https://coronavirus.saude.gov.br/" target="_blank">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Flag_of_Brazil_%283-2%29.svg/1200px-Flag_of_Brazil_%283-2%29.svg.png" alt="Nature" style="width:100%">
-                        </a>
-                    </div>
+                <div class="col-md-2 mb-3">
+                    <a href="mailto: ignaciofrizzera@gmail.com">
+                        <i class="fa fa-envelope-o" style="font-size:36px"></i>
+                    </a>
                 </div>
-                <div class="col-md-4">
-                    <div class="spain">
-                        <a href="https://administracion.gob.es/pag_Home/atencionCiudadana/Estado-de-alarma-crisis-sanitaria.html#.XqHpgshKjcc" target="_blank">
-                            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Flag_of_Spain.svg/1200px-Flag_of_Spain.svg.png" alt="Fjords" style="width:100%">
-                        </a>
-                    </div>
+                <div class="col-md-2 mb-3">
+                    <a href="https://www.linkedin.com/in/ignacio-frizzera-1a94ab195/">
+                        <i class="fa fa-linkedin" style="font-size:36px"></i>
+                    </a>
                 </div>
             </div>
+            <hr class="rgba-white-light" style="margin: 0 15%;">
         </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="china">
-                        <a href="https://www.gov.cn/english/" target="_blank">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/800px-Flag_of_the_People%27s_Republic_of_China.svg.png" alt="Fjords" style="width:100%">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="usa">
-                        <a href="https://www.usa.gov/coronavirus" target="_blank">
-                            <img src="res/usa_flag.png" alt="Fjords" style="width:100%">
-                        </a>
-                    </div>
-                </div>
-            </div>
+        <div class="footer-copyright text-center py-3">
+            Made with:
+            <a href="https://getbootstrap.com/"> Bootstrap</a>
         </div>
+    </footer>
 
-        <div class="container" id="personal_info">
-            <a href="https://github.com/IgnacioFrizzera">
-                <i class="fa fa-github" style="font-size:36px"></i>
-            </a>
-            <a href="mailto: ignaciofrizzera@gmail.com">
-                <i class="fa fa-envelope-o" style="font-size:36px"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/ignacio-frizzera-1a94ab195/">
-                <i class="fa fa-linkedin" style="font-size:36px"></i>
-            </a>
-        </div>
 </body>
 </html>
