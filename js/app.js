@@ -30,7 +30,7 @@ function load_data() {
     }
 
 
-    const url = "https://raw.githubusercontent.com/pomber/covid19/master/docs/timeseries.json";
+    const url = "https://raw.githubusercontent.com/pomber/covid19/master/docs/timeseries.jso";
 
     /** JSON
         date: "2020-2-21",
@@ -59,7 +59,7 @@ function load_data() {
         today = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
         // Information updates daily, so if the last update was today, there's no need to save all the data again
-        if (today != localStorage.getItem("last_update")) { 
+        if (today != localStorage.getItem("last_update")) {
             localStorage.clear();
 
             localStorage.setItem("brazil", JSON.stringify(brazil_info));
@@ -83,7 +83,7 @@ function load_data() {
 
             const storage_length = localStorage.length;
 
-            if (storage_length > 0) {   // Case the local storage has API information stored.
+            if (3 > 5) {   // Case the local storage has API information stored.
 
                 brazil_info = JSON.parse(localStorage.getItem("brazil"));
                 spain_info = JSON.parse(localStorage.getItem("spain"));
@@ -101,10 +101,23 @@ function load_data() {
                 alert("Server error, using data from: " + date);
             }
             else {  // Case API failed, local storage is empty, get information from local file
-                // Get local JSON file
+
+                // Get local JSON arrays for each country
+                brazil_info = brazil_local_data;
+                spain_info = spain_local_data;
+                usa_info = usa_local_data;
+                china_info = china_local_data;
+                italy_info = italy_local_data;
+                russia_info = russia_local_data;
+
+                arrs_len = Object.keys(brazil_info).length;
+
+                // All dates are the same for each country
+                for (var i = 0; i < arrs_len; i++) {
+                    dates.push(brazil_info[i].date);
+                }
             }
             show_cases();
-            
         });
 }
 
