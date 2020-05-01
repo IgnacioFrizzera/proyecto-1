@@ -30,7 +30,7 @@ function load_data() {
     }
 
 
-    const url = "https://raw.githubusercontent.com/pomber/covid19/master/docs/timeseries.jso";
+    const url = "https://raw.githubusercontent.com/pomber/covid19/master/docs/timeseries.json";
 
     /** JSON
         date: "2020-2-21",
