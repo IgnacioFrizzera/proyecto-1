@@ -1,6 +1,8 @@
 // Local file with outdated data in case API and local storage fail
+// Data is from 2020-1-22 to 2020-4-27
 
 var brazil_local_data, spain_local_data, usa_local_data, russia_local_data, china_local_data, italy_local_data;
+const local_data_date = "2020-4-27";
 
 window.onload = generate_data();
 /**

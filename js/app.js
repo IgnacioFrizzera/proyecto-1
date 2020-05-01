@@ -60,7 +60,6 @@ function load_data() {
 
         // Information updates daily, so if the last update was today, there's no need to save all the data again
         if (today != localStorage.getItem("last_update")) {
-            localStorage.clear();
 
             localStorage.setItem("brazil", JSON.stringify(brazil_info));
             localStorage.setItem("spain", JSON.stringify(spain_info));
@@ -81,9 +80,9 @@ function load_data() {
         // In case it fails to get the data from the URL, loads last saved data
         .fail(function () {
 
-            const storage_length = localStorage.length;
+            var last_updated_date;
 
-            if (3 > 5) {   // Case the local storage has API information stored.
+            if (localStorage.getItem("Brazil") != null) {   // Case the local storage has API information stored.
 
                 brazil_info = JSON.parse(localStorage.getItem("brazil"));
                 spain_info = JSON.parse(localStorage.getItem("spain"));
@@ -98,7 +97,7 @@ function load_data() {
 
                 date = localStorage.getItem("last_update");
 
-                alert("Server error, using data from: " + date);
+                last_updated_date = date;
             }
             else {  // Case API failed, local storage is empty, get information from local file
 
@@ -116,13 +115,21 @@ function load_data() {
                 for (var i = 0; i < arrs_len; i++) {
                     dates.push(brazil_info[i].date);
                 }
+
+                last_updated_date = local_data_date;
             }
+
+            alert("Server error, using outdated data from: 2020-1-22 to " + last_updated_date);
+
             show_cases();
         });
 }
 
-
+/**
+ * Switches themes dark/light
+ */
 function switchTheme(e) {
+
     if (e.target.checked) {
         document.documentElement.setAttribute('data-theme', 'dark');
         localStorage.setItem('theme', 'dark');
@@ -245,6 +252,7 @@ function show_lastfif() {
  * @param {title of the graph} graph_title
  */
 function make_graph(x_value, y_values, y_label, graph_title) {
+
     const graph = document.getElementById('graphic');
 
     var brazil_graph = {
