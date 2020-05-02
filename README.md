@@ -6,7 +6,7 @@ Proyecto a desarrollar para la materia Ingeniería de aplicaciones Web
 
 ### Idea:
 
-La página va a consistir de un portal donde se presente un gráfico mostrando información sobre el coronavirus en 6 países: Estados Unidos, Brasil, España, Italia, Rusia y China, que serían 5 focos bien distribuidos geograficamente. El grafico va a mostrar 6 curvas, una por cada país. El usuario va a poder elegir mostrar en el gráfico:
+La página va a consistir de un portal donde se presente un gráfico mostrando información sobre el coronavirus en 6 países: Estados Unidos, Brasil, España, Italia, Rusia y China, que serían 6 focos bien distribuidos geograficamente. El grafico va a mostrar 6 curvas, una por cada país. El usuario va a poder elegir mostrar en el gráfico:
 
 * Cantidad de contagiados
 * Cantidad de muertes
