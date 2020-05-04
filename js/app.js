@@ -29,8 +29,7 @@ function load_data() {
         }
     }
 
-
-    const url = "https://raw.githubusercontent.com/pomber/covid19/master/docs/timeseries.jso";
+    const url = "https://raw.githubusercontent.com/pomber/covid19/master/docs/timeseries.json";
 
     /** JSON
         date: "2020-2-21",
@@ -133,9 +132,11 @@ function switchTheme(e) {
     if (e.target.checked) {
         document.documentElement.setAttribute('data-theme', 'dark');
         localStorage.setItem('theme', 'dark');
+        // Plotly.relayout(graphic, new_layout) TODO
     } else {
         document.documentElement.setAttribute('data-theme', 'light');
         localStorage.setItem('theme', 'light');
+        // Plotly.relayout(graphic, new_layout) TODO
     }
 }
 
