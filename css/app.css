@@ -1,9 +1,9 @@
 :root {
-    --primary-color: #302AE6;
-    --secondary-color: #536390;
-    --font-color: #424242;
-    --bg-color: #fff;
-    --heading-color: #292922;
+    --primary-color: #47b364;
+    --secondary-color: #47b364;
+    --font-color: #e1e1ff;
+    --bg-color: #161625;
+    --heading-color: #818cab;
 }
 
 [data-theme="dark"] {
@@ -23,16 +23,16 @@ a {
 }
 
 
+.rgba-white-light {
+    background-color: var(--bg-color);
+    color: var(--bg-color);
+}
+
 .theme-switch-wrapper {
     display: flex;
     align-items: center;
-    em
-
-{
     margin-left: 10px;
     font-size: 1rem;
-}
-
 }
 
 .theme-switch {
@@ -91,10 +91,11 @@ body {
     font-family: 'Trebuchet MS';
 }
 
-.jumbotron {
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
+.hr {
+    margin: 0 15%;
+    color: var(--font-color);
+    height: 4px;
+    background-color: var(--font-color);
 }
 
 .container-fluid {
@@ -106,50 +107,15 @@ body {
     padding:12px;
 }
 
-#buttons {
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    padding:12px;
+#general_information {
+    text-align: justify;
+    background-color: var(--bg-color);
 }
 
 #graphic {
     width:1000px;
     height:400px;
 }
-
-
-#personal_info {
-    padding-top:24px;
-    padding-bottom:12px;
-    letter-spacing:6px;
-}
-
-.button {
-    box-shadow: 0px 10px 14px -7px #276873;
-    background: linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
-    background-color: #599bb3;
-    border-radius: 8px;
-    display: inline-block;
-    cursor: pointer;
-    color: #ffffff;
-    font-size: 12px;
-    font-family: Trebuchet MS;
-    font-weight: bold;
-    padding: 13px 32px;
-    text-decoration: none;
-    text-shadow: 0px 1px 0px #3d768a;
-}
-
-    .button:hover {
-        background: linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
-        background-color: #408c99;
-    }
-
-    .button:active {
-        position: relative;
-        top: 1px;
-    }
 
 .img_fluid {
     float: left;

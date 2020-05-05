@@ -31,11 +31,11 @@ function load_data() {
 
     const url = "https://raw.githubusercontent.com/pomber/covid19/master/docs/timeseries.json";
 
-    /** JSON
-        date: "2020-2-21",
-        confirmed: 0,
-        deaths: 0,
-        recovered: 0
+    /** JSON entry structure
+        date,
+        confirmed,
+        deaths,
+        recovered
      * */
     $.getJSON(url, function (data) {
         brazil_info = data.Brazil;
