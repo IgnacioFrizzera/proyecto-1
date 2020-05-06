@@ -1,17 +1,15 @@
 :root {
     --primary-color: #47b364;
-    --secondary-color: #47b364;
     --font-color: #e1e1ff;
     --bg-color: #161625;
     --heading-color: #818cab;
 }
 
 [data-theme="dark"] {
-    --primary-color: #47b364;
-    --secondary-color: #47b364;
-    --font-color: #e1e1ff;
-    --bg-color: #161625;
-    --heading-color: #818cab;
+    --primary-color: #302AE6;
+    --font-color: #424242;
+    --bg-color: #fff;
+    --heading-color: #292922;
 }
 
 h1 {
@@ -89,13 +87,6 @@ body {
     background-color: var(--bg-color);
     color: var(--font-color);
     font-family: 'Trebuchet MS';
-}
-
-.hr {
-    margin: 0 15%;
-    color: var(--font-color);
-    height: 4px;
-    background-color: var(--font-color);
 }
 
 .container-fluid {

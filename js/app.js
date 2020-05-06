@@ -125,25 +125,33 @@ function load_data() {
 }
 
 /**
- * Switches themes dark/light
+ * Switches themes dark/light and stores user last theme
  */
 function switchTheme(e) {
 
     if (e.target.checked) {
         document.documentElement.setAttribute('data-theme', 'dark');
         localStorage.setItem('theme', 'dark');
-        // Plotly.relayout(graphic, new_layout) TODO
     } else {
         document.documentElement.setAttribute('data-theme', 'light');
         localStorage.setItem('theme', 'light');
-        // Plotly.relayout(graphic, new_layout) TODO
     }
 }
 
 /**
- * Gets active cases data and then plots it
- * */
-function show_cases() {
+ * Shows active cases and then plots them
+ * @param {boolean} mod, if true plot the last 15 days, else plot as usual
+ */
+function show_cases(mod) {
+
+    graph_title = "Activate cases";
+    dates_aux = [];
+    i = 0;
+
+    if (mod == true) {
+        graph_title = "Active cases in the past 15 days";
+        i = arrs_len - 15;
+    }
 
     var spain_confirmed = [];
     var brazil_confirmed = [];
@@ -152,17 +160,19 @@ function show_cases() {
     var italy_confirmed = [];
     var russia_confirmed = [];
 
-    for (i = 0; i < arrs_len; i++) {
+    for (i; i < arrs_len; i++) {
         brazil_confirmed.push(brazil_info[i].confirmed);
         usa_confirmed.push(usa_info[i].confirmed);
         spain_confirmed.push(spain_info[i].confirmed);
         china_confirmed.push(china_info[i].confirmed);
         italy_confirmed.push(italy_info[i].confirmed);
         russia_confirmed.push(russia_info[i].confirmed);
+
+        dates_aux.push(brazil_info[i].date);
     }
 
     var countries = [brazil_confirmed, spain_confirmed, usa_confirmed, china_confirmed, italy_confirmed, russia_confirmed];
-    make_graph(dates, countries, "Active cases", "Active cases");
+    make_graph(dates_aux, countries, "Active cases", graph_title);
 }
 
 /**
@@ -214,36 +224,6 @@ function show_recovered() {
     var countries = [brazil_recovered, spain_recovered, usa_recovered, china_recovered, italy_recovered, russia_recovered];
     make_graph(dates, countries, "Recovered", "Recovered cases");
 }
-
-/**
- * Gets active cases in the past 15 days data and then plots it
- * */
-function show_lastfif() {
-    var spain_confirmed = [];
-    var brazil_confirmed = [];
-    var usa_confirmed = [];
-    var china_confirmed = [];
-    var italy_confirmed = [];
-    var russia_confirmed = [];
-
-    var i = arrs_len - 15;
-    var dates_aux = [];
-
-    for (i; i < arrs_len; i++) {
-        brazil_confirmed.push(brazil_info[i].confirmed);
-        usa_confirmed.push(usa_info[i].confirmed);
-        spain_confirmed.push(spain_info[i].confirmed);
-        china_confirmed.push(china_info[i].confirmed);
-        italy_confirmed.push(italy_info[i].confirmed);
-        russia_confirmed.push(russia_info[i].confirmed);
-
-        dates_aux.push(brazil_info[i].date);
-    }
-
-    var countries = [brazil_confirmed, spain_confirmed, usa_confirmed, china_confirmed, italy_confirmed, russia_confirmed];
-    make_graph(dates_aux, countries, "Active cases", "Activate cases in the past 15 days");
-}
-
 
 /**
  *  * Makes the graph to show the information

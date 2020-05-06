@@ -62,11 +62,13 @@
 
         <div class="container-fluid" id="graphic"></div>
 
-        <div class ="container" id="buttons">
-            <button class="btn btn-info" onclick="show_cases()">Show active cases</button>
-            <button class="btn btn-info" onclick="show_deaths()">Show deaths</button>
-            <button class="btn btn-info" onclick="show_recovered()">Show recovered</button>
-            <button class="btn btn-info" onclick="show_lastfif()">Show active in the last 15 days</button>
+        <div class="container" id="buttons">
+            <div class="container">
+                <button class="btn btn-info" onclick="show_cases(false)">Show active cases</button>
+                <button class="btn btn-info" onclick="show_deaths()">Show deaths</button>
+                <button class="btn btn-info" onclick="show_recovered()">Show recovered</button>
+                <button class="btn btn-info" onclick="show_cases(true)">Show active in the last 15 days</button>
+            </div>
         </div>
 
         <div class="container" id="general_information">
@@ -193,7 +195,6 @@
                         </a>
                     </div>
                 </div>
-                <hr>
             </div>
             <div class="footer-copyright text-center py-3">
                 Made with:
