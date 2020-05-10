@@ -1,4 +1,4 @@
-
+// Countries information
 var brazil_info, spain_info, usa_info, china_info, italy_info, russia_info;
 
 // All countries dates are from 1-22 to present
@@ -53,7 +53,6 @@ function load_data() {
         }
 
         // Store last version of data in case the API doesn't work in the future
-
         var today = new Date();
         today = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
@@ -125,7 +124,7 @@ function load_data() {
 }
 
 /**
- * Switches themes dark/light and stores user last theme
+ * Switches themes dark/light and stores user last theme choise
  */
 function switchTheme(e) {
 
@@ -139,17 +138,17 @@ function switchTheme(e) {
 }
 
 /**
- * Shows active cases and then plots them
- * @param {boolean} mod, if true plot the last 15 days, else plot as usual
+ * Shows total cases and then plots them
+ * @param {boolean} mod, if true plot the last 15 days cases, else plot as usual
  */
 function show_cases(mod) {
 
-    graph_title = "Activate cases";
+    graph_title = "Total cases";
     dates_aux = [];
     i = 0;
 
     if (mod == true) {
-        graph_title = "Active cases in the past 15 days";
+        graph_title = "Cases in the past 15 days";
         i = arrs_len - 15;
     }
 
@@ -172,7 +171,7 @@ function show_cases(mod) {
     }
 
     var countries = [brazil_confirmed, spain_confirmed, usa_confirmed, china_confirmed, italy_confirmed, russia_confirmed];
-    make_graph(dates_aux, countries, "Active cases", graph_title);
+    make_graph(dates_aux, countries, "Cases", graph_title);
 }
 
 /**
