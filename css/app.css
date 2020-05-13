@@ -1,0 +1,124 @@
+:root {
+    --primary-color: #47b364;
+    --font-color: #e1e1ff;
+    --bg-color: #161625;
+    --heading-color: #818cab;
+}
+
+[data-theme="dark"] {
+    --primary-color: #302AE6;
+    --font-color: #424242;
+    --bg-color: #fff;
+    --heading-color: #292922;
+}
+
+h1 {
+    color: var(--secondary-color);
+}
+
+h2 {
+    text-align:center;
+}
+
+h3{
+    text-align:center;
+    text-decoration:underline;
+}
+
+a {
+    color: var(--primary-color);
+}
+
+
+.rgba-white-light {
+    background-color: var(--bg-color);
+    color: var(--bg-color);
+}
+
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    font-size: 1rem;
+}
+
+.theme-switch {
+    display: inline-block;
+    height: 34px;
+    position: relative;
+    width: 60px;
+}
+
+    .theme-switch input {
+        display: none;
+    }
+
+.slider {
+    background-color: #ccc;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+}
+
+    .slider:before {
+        background-color: #fff;
+        bottom: 4px;
+        content: "";
+        height: 26px;
+        left: 4px;
+        position: absolute;
+        transition: .4s;
+        width: 26px;
+    }
+
+input:checked + .slider {
+    background-color: #66bb6a;
+}
+
+    input:checked + .slider:before {
+        transform: translateX(26px);
+    }
+
+.slider.round {
+    border-radius: 34px;
+}
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+
+
+body {
+    background-color: var(--bg-color);
+    color: var(--font-color);
+    font-family: 'Trebuchet MS';
+}
+
+.container-fluid {
+    padding: 12px;
+}
+
+.container {
+    text-align: center;
+    padding:12px;
+}
+
+#general_information {
+    text-align: justify;
+    background-color: var(--bg-color);
+}
+
+#graphic {
+    width:1000px;
+    height:400px;
+}
+
+.img_fluid {
+    float: left;
+    max-height: 10%;
+    max-width: 10%;
+}

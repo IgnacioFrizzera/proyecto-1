@@ -1,18 +1,211 @@
-<!doctype html>
+﻿<!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/app.css">
+        <!-- JQuery integration for JSON -->
+        <script src="https://code.jquery.com/jquery-3.5.0.min.js"
+                integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+                crossorigin="anonymous">
+        </script>
+        <!-- Plotly to graph -->
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
-    <title>Proyecto 1</title>
-  </head>
-  <body>
-    <h1>Proyecto 1</h1>
+
+        <!-- CSS -->
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <!-- Font Awesome Brand Icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="css/app.css">
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+        <title>Covid-19 Visualization</title>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-md navbar navbar-dark bg-dark">
+        <a href="https://www.paho.org/en" class="navbar-brand" target="_blank">
+            <img src="https://www.oceantranslations.com/wp-content/uploads/2019/05/paho-logo-blue.png"
+                 height="64" />
+        </a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="navbar-header">
+                    <h1 class="navbar-brand"> Covid-19 Visualization </h1>
+                </div>
+            </div>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ml-auto">
+                <div class="theme-switch-wrapper">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox" />
+                        <div class="slider round"></div>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </nav>
 
     <!-- JavaScript -->
+    <script src="res/local_data.js"></script>
     <script src="js/app.js"></script>
-  </body>
+
+    <h2>Interactive Graph</h2>
+    <h2>Double click on graph to restore default values</h2>
+    
+    <div class="container-fluid" id="graphic"></div>
+
+    <div class="container" id="buttons">
+        <div class="container">
+            <button class="btn btn-info" onclick="show_cases(false)">Show cases</button>
+            <button class="btn btn-info" onclick="show_deaths()">Show deaths</button>
+            <button class="btn btn-info" onclick="show_recovered()">Show recovered</button>
+            <button class="btn btn-info" onclick="show_cases(true)">Show cases in the last 15 days</button>
+        </div>
+    </div>
+
+    <div class="container" id="general_information">
+        <h2>Information regardless Covid-19</h2>
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Symptoms</h3>
+                <strong>
+                    Covid-19 affects different people in different ways. Most infected people will develop mild to moderate symptoms. If you have any of the following symptoms, don't hesitate to contact a doctor.
+                    <br />
+                    Common symptoms:
+                </strong>
+                <ul>
+                    <li>Fever</li>
+                    <li>Tiredness</li>
+                    <li>Dry cough</li>
+                </ul>
+                <strong>
+                    Some people may experience:
+                </strong>
+                <ul>
+                    <li>Aches and pains</li>
+                    <li>Nasal congestion</li>
+                    <li>Runny nose</li>
+                    <li>Sore throat</li>
+                    <li>Diarrhoea</li>
+                </ul>
+                <strong>
+                    On average it takes 5–6 days from when someone is infected with the virus for symptoms to show, however it can take up to 14 days. For more information go to:
+                    <a href="https://www.who.int/news-room/q-a-detail/q-a-coronaviruses#:~:text=symptoms">World Health Organization: Covid-19 Symptoms</a>
+                </strong>
+            </div>
+            <div class="col-sm-6">
+                <h3>Prevention measures</h3>
+                <strong>
+                    Protect yourself and others around you by knowing the facts and taking appropriate precautions. Follow advice provided by your local public health agency.
+                    <br />
+                    To prevent the spread of Covid-19:
+                </strong>
+                <ul>
+                    <li>Clean your hands often. Use soap and water, or an alcohol-based hand rub</li>
+                    <li>Maintain a safe distance from anyone who is coughing or sneezing</li>
+                    <li>Don’t touch your eyes, nose or mouth</li>
+                    <li>Cover your nose and mouth with your bent elbow or a tissue when you cough or sneeze</li>
+                    <li>Stay home if you feel unwell</li>
+                    <li>If you have a fever, a cough, and difficulty breathing, seek medical attention. Call in advance</li>
+                    <li>Follow the directions of your local health authority</li>
+                </ul>
+                <strong>
+                    Avoiding unneeded visits to medical facilities allows healthcare systems to operate more effectively, therefore protecting you and others. For more informagion go to:
+                    <a href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public">World Health Organization: Covid-19 Prevent</a>
+                </strong>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>For more information on each country policies</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="italy">
+                    <a href="http://www.governo.it/it/coronavirus" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Flag_of_Italy_%281946%E2%80%932003%29.png/1024px-Flag_of_Italy_%281946%E2%80%932003%29.png" alt="Lights" style="width:100%">
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="brazil">
+                    <a href="https://coronavirus.saude.gov.br/" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Flag_of_Brazil_%283-2%29.svg/1200px-Flag_of_Brazil_%283-2%29.svg.png" alt="Nature" style="width:100%">
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="spain">
+                    <a href="https://administracion.gob.es/pag_Home/atencionCiudadana/Estado-de-alarma-crisis-sanitaria.html#.XqHpgshKjcc" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Flag_of_Spain.svg/1200px-Flag_of_Spain.svg.png" alt="Fjords" style="width:100%">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="china">
+                    <a href="https://www.gov.cn/english/" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/800px-Flag_of_the_People%27s_Republic_of_China.svg.png" alt="Fjords" style="width:100%">
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="usa">
+                    <a href="https://www.usa.gov/coronavirus" target="_blank">
+                        <img src="res/usa_flag.png" alt="Fjords" style="width:100%">
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="russia">
+                    <a href="https://ru.usembassy.gov/covid-19-information/" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Flag_of_Russia_with_border.svg/1200px-Flag_of_Russia_with_border.svg.png" alt="Fjords" style="width:100%">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="page-footer font-small indigo">
+        <div class="container">
+            <div class="row text-center d-flex justify-content-center pt-5 mb-3">
+                <div class="col-md-2 mb-3">
+                    <a href="https://github.com/IgnacioFrizzera" target="_blank">
+                        <i class="fa fa-github" style="font-size:36px"></i>
+                    </a>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <a href="mailto: ignaciofrizzera@gmail.com">
+                        <i class="fa fa-envelope-o" style="font-size:36px"></i>
+                    </a>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <a href="https://www.linkedin.com/in/ignacio-frizzera-1a94ab195/" target="_blank">
+                        <i class="fa fa-linkedin" style="font-size:36px"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright text-center py-3">
+            Made with:
+            <a href="https://getbootstrap.com/" target="_blank"> Bootstrap</a>
+        </div>
+    </footer>
+
+</body>
 </html>
